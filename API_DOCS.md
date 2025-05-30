@@ -12,11 +12,12 @@
 
 #### and `ShareData`
 
-| Result    | Type   | Description                                                                               |
-| --------- | ------ | ----------------------------------------------------------------------------------------- |
-| mimeType  | String | The mime type of the shared data                                                          |
-| data      | String | Either the shared text, or the location of the shared file                                |
-| extraData | Object | Can be null. Any optional extra data your Share Extension React View opened the app with. |
+| Result           | Type   | Description                                                                               |
+| ---------------- | ------ | ----------------------------------------------------------------------------------------- |
+| mimeType         | String | The mime type of the shared data                                                          |
+| data             | String | Either the shared text, or the location of the shared file                                |
+| extraData        | Object | Can be null. Any optional extra data your Share Extension React View opened the app with. |
+| originalFilename | String | The original filename of the shared file (iOS only). May not be available for all files.  |
 
 ### `addNewShareListener(callback: ShareCallback) : ShareListener`
 
@@ -28,11 +29,12 @@
 
 #### and `ShareData`
 
-| Result    | Type   | Description                                                                               |
-| --------- | ------ | ----------------------------------------------------------------------------------------- |
-| mimeType  | String | The mime type of the shared data                                                          |
-| data      | String | Either the shared text, or the location of the shared file                                |
-| extraData | Object | Can be null. Any optional extra data your Share Extension React View opened the app with. |
+| Result           | Type   | Description                                                                               |
+| ---------------- | ------ | ----------------------------------------------------------------------------------------- |
+| mimeType         | String | The mime type of the shared data                                                          |
+| data             | String | Either the shared text, or the location of the shared file                                |
+| extraData        | Object | Can be null. Any optional extra data your Share Extension React View opened the app with. |
+| originalFilename | String | The original filename of the shared file (iOS only). May not be available for all files.  |
 
 #### and `ShareListener`
 
