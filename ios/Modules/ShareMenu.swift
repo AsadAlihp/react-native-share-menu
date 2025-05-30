@@ -104,6 +104,9 @@ class ShareMenu: RCTEventEmitter {
 
         if let bundleId = Bundle.main.bundleIdentifier, let userDefaults = UserDefaults(suiteName: "group.\(bundleId)") {
             data[EXTRA_DATA_KEY] = userDefaults.object(forKey: USER_DEFAULTS_EXTRA_DATA_KEY) as? [String: Any]
+            if let originalFilename = (sharedData as? [[String: String]])?.first?[ORIGINAL_FILENAME_KEY] {
+                data[ORIGINAL_FILENAME_KEY] = originalFilename
+            }
         } else {
             print("Error: \(NO_APP_GROUP_ERROR)")
         }
