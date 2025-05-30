@@ -92,7 +92,14 @@ public class ShareMenuReactView: NSObject {
                 return
             }
 
-            resolve([DATA_KEY: data])
+            let firstItem = (data as? [[String: String]])?.first
+            var result: [String: Any] = [DATA_KEY: data]
+            
+            if let originalFilename = firstItem?[ORIGINAL_FILENAME_KEY] {
+                result[ORIGINAL_FILENAME_KEY] = originalFilename
+            }
+            
+            resolve(result)
         }
     }
 
@@ -133,7 +140,11 @@ public class ShareMenuReactView: NSObject {
 
                             if (imageUrl != nil) {
                                 if let imageData = try? Data(contentsOf: imageUrl) {
-                                    results.append([DATA_KEY: imageUrl.absoluteString, MIME_TYPE_KEY: self.extractMimeType(from: imageUrl)])
+                                    results.append([
+                                        DATA_KEY: imageUrl.absoluteString,
+                                        MIME_TYPE_KEY: self.extractMimeType(from: imageUrl),
+                                        ORIGINAL_FILENAME_KEY: imageUrl.lastPathComponent
+                                    ])
                                 }
                             } else {
                                 let image: UIImage! = item as? UIImage
@@ -164,7 +175,11 @@ public class ShareMenuReactView: NSObject {
                         provider.loadItem(forTypeIdentifier: kUTTypeData as String, options: nil) { (item, error) in
                             let url: URL! = item as? URL
 
-                            results.append([DATA_KEY: url.absoluteString, MIME_TYPE_KEY: self.extractMimeType(from: url)])
+                            results.append([
+                                DATA_KEY: url.absoluteString,
+                                MIME_TYPE_KEY: self.extractMimeType(from: url),
+                                ORIGINAL_FILENAME_KEY: url.lastPathComponent
+                            ])
 
                             semaphore.signal()
                         }
