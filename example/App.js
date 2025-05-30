@@ -12,6 +12,7 @@ import ShareMenu from 'react-native-share-menu';
 type SharedItem = {
   mimeType: string,
   data: string,
+  originalFilename?: string,
 };
 
 const App: () => React$Node = () => {
@@ -24,11 +25,12 @@ const App: () => React$Node = () => {
       return;
     }
 
-    const {mimeType, data, extraData} = item;
+    const {mimeType, data, extraData, originalFilename} = item;
 
     setSharedData(data);
     setSharedExtraData(extraData);
     setSharedMimeType(mimeType);
+    console.log('Original filename:', originalFilename);
   }, []);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ const App: () => React$Node = () => {
       <Text style={styles.instructions}>
         Shared file:{' '}
         {sharedMimeType !== 'text/plain' && !sharedMimeType.startsWith('image/')
-          ? sharedData
+          ? `${sharedData} (Original name: ${item?.originalFilename || 'N/A'})`
           : ''}
       </Text>
       <Text style={styles.instructions}>
