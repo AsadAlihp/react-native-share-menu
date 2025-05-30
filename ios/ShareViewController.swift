@@ -236,7 +236,12 @@ class ShareViewController: SLComposeServiceViewController {
       let resultCopy = self.moveFileToDisk(from: url, to: filePath)
       NSLog("ShareViewController: storeUrl resultCopy")
 
-      self.sharedItems.append([DATA_KEY: filePath.absoluteString, MIME_TYPE_KEY: mimeType])
+      let originalFilename = url.lastPathComponent
+      self.sharedItems.append([
+        DATA_KEY: filePath.absoluteString,
+        MIME_TYPE_KEY: mimeType,
+        ORIGINAL_FILENAME_KEY: originalFilename
+      ])
       semaphore.signal()
     }
   }
@@ -318,7 +323,12 @@ class ShareViewController: SLComposeServiceViewController {
         return
       }
 
-      self.sharedItems.append([DATA_KEY: filePath.absoluteString, MIME_TYPE_KEY: mimeType])
+      let originalFilename = url.lastPathComponent
+      self.sharedItems.append([
+        DATA_KEY: filePath.absoluteString,
+        MIME_TYPE_KEY: mimeType,
+        ORIGINAL_FILENAME_KEY: originalFilename
+      ])
       NSLog("ShareViewController: storeFile end")
 
       semaphore.signal()
